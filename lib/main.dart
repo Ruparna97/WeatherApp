@@ -4,32 +4,58 @@ void main() {
   runApp(MyApp());
 }
 
-class MyApp extends StatelessWidget {
+class MyApp extends StatefulWidget {
+  @override
+  _MyAppState createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
+  int temperature = 0;
+  String Location = "Kolkata";
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
         home: Container(
-      child: Center(
-        child: Text('Weather With Your Name',
-            style: TextStyle(
-              decoration: TextDecoration.none,
-              color: Colors.white.withOpacity(0.9),
-              fontSize: 25,
-              fontWeight: FontWeight.bold,
-              shadows: <Shadow>[
-                Shadow(
-                  offset: Offset(5.0, 5.0),
-                  blurRadius: 2.0,
-                  color: Color.fromARGB(255, 0, 0, 0),
-                ),
-              ],
+            decoration: BoxDecoration(
+                image: DecorationImage(
+              image: new AssetImage("images/weather1.jpg"),
+              fit: BoxFit.cover,
             )),
-      ),
-      decoration: BoxDecoration(
-          image: DecorationImage(
-        image: new AssetImage("images/weather1.jpg"),
-        fit: BoxFit.fill,
-      )),
-    ));
+            child: Scaffold(
+                backgroundColor: Colors.transparent,
+                body: Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: <Widget>[
+                    Text(
+                      Location,
+                      style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 50,
+                          fontWeight: FontWeight.bold),
+                    ),
+                    Center(
+                        child: Text(
+                      temperature.toString() + " °C",
+                      style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 40,
+                          fontWeight: FontWeight.bold),
+                    )),
+                    Column(
+                      children: [
+                        TextField(
+                            style: TextStyle(color: Colors.white, fontSize: 25),
+                            decoration: InputDecoration(
+                              hintText: 'Search another location...',
+                              hintStyle: TextStyle(
+                                  color: Colors.white, fontSize: 18.0),
+                              prefixIcon:
+                                  Icon(Icons.search, color: Colors.white),
+                            )),
+                      ],
+                    )
+                  ],
+                ))));
   }
 }
